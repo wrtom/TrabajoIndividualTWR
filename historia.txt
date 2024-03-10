@@ -1,0 +1,124 @@
+1-
+
+mkdir trabajoIndividualWRT  /*creamos un directorio*/
+cd trabajoIndividualWRT/
+git init /*inicializamos un repositorio de git en el directorio creado*/
+
+/*creamos las carpetas necesarias para cumplir con la estructura de directorios*/
+mkdir -p Proyectos/Prj1/
+mkdir -p Procesos/ControlDeCambios       
+
+
+2- 
+
+/*creamos el fichero para el historial de comandos*/
+touch historia.txt
+
+3-
+
+
+/*añadimos al área de preparación el directorio en el que hemos añadido la versión inicial y sus plantillas*/
+git add Procesos/ControlDeCambios/
+
+/*hacemos un commit de los cambios aplicados añadiendo un mensaje descriptivo*/
+
+git commit -m "Inclusión de la V1 del proceso de GC y sus plantillas"
+
+4-
+
+
+/*añadimos la etiqueta R1 que nos marca la versión del proceso de GC, con un mensaje descriptivo*/
+git tag -a R1 -m "Versión R1 del proceso de GC"
+ 
+
+5- 
+
+/*creamos la rama de mejoras*/
+git branch Mejoras
+
+/*cambiamos de la rama master a la rama de mejoras*/
+git checkout Mejoras
+
+/*añadimos al área de preparación el PDF con los cambios y realizamos un commit*/
+git add Procesos/ControlDeCambios/DP_ControldeCambios_Grupo7.pdf 
+git commit -m "Inclusión PDF con propuestas de mejora"
+
+6-
+
+
+/*añadimos al área de preparación la versión 2 del documento y sus plantillas*/
+git add Procesos/ControlDeCambios/
+
+/*commit del proceso con las plantillas actualizadas*/
+git commit -m "V2 del proceso de GC con plantillas actualizadas"
+
+
+7-
+
+/*cambiamos a la rama master*/
+git checkout master
+
+/*fusionamos la rama Mejoras con master/main y eliminamos la rama Mejoras*/ 
+/*se integran los cambios realizados en la rama Mejoras en la rama main*/
+git merge Mejoras -m "Mejoras y master/main fusionados"
+git branch -d Mejoras 
+ 
+8-    
+
+/*eliminamos el fichero PDF y hacemos un commit*/
+     
+git rm Procesos/ControlDeCambios/DP_ControldeCambios_Grupo7.pdf 
+git commit -m "PDF con las propuestas de mejora eliminado"
+
+9-      
+
+/*añadimos la etiqueta */
+git tag -a R2 -m "Versión 2 del documento teniendo en cuenta las propuestas de cambio"
+
+10-
+
+/*añadimos al área de preparación la versión 3 del documento y hacemos un commit*/
+git add Procesos/ControlDeCambios/
+git commit -m "V3 del proceso de GC"
+
+ 
+11-   
+
+/*con la opción --hard especificamos que queremos ELIMINAR commits, no revertirlo
+y con HEAD~1 indicamos que solo queremos eliminar el último. También podríamos haber
+especificado el HASH del commit*/
+
+git reset --hard HEAD~1
+
+/*añadimos las plantillas y la v3 al área de preparación y hacemos un commit, esta vez con todo lo necesario*/
+git add Procesos/ControlDeCambios/
+git commit -m "Versión 3 del proceso de GC con las plantillas"
+git tag -a R3 -m "Versión R3 del proceso de GC"
+
+12-
+
+/*nos conectamos con un repositorio remoto, previamente creado*/
+git remote add origin https://github.com/wrtom/trabajoIndividualWRT.git
+
+/*subimos los cambios y etiquetas de la rama master*/
+git push origin master --tags
+
+13-
+
+/*actualizamos el repositorio local con los cambios en el repositorio remoto*/
+git pull origin master
+
+
+14-
+
+/*comparamos la versión actual de historia con la del repositorio remoto*/
+git diff historia.txt
+
+
+15- 
+
+/*añadimos historia.txt al área de preparación, hacemos un commit y subimos 
+al repositorio remoto los cambios*/
+git add historia.txt
+git commit -m "Inclusión de los comandos a historia.txt"
+git push origin master
